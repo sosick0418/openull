@@ -1,12 +1,10 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import styled from 'styled-components/native';
 
-const PageList = () => {
-  return (
-    <View>
-      <Text />
-    </View>
-  );
+const Container = styled.View``;
+
+const PageList = (): JSX.Element => {
+  return <Container />;
 };
 
 export default PageList;
