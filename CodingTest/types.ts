@@ -1,3 +1,1 @@
-export type RootStackParamList = {
-  Root: undefined;
-};
+export {};
