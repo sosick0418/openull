@@ -1,17 +1,15 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import PageList from './src/screens/PageList';
+import { Provider } from 'react-redux';
+import initStore from './src/redux/store';
+import { RootNavigator } from './src/navigation';
 
-const Stack = createNativeStackNavigator();
+const store = initStore();
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="PageList">
-        <Stack.Screen name="PageList" component={PageList} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <RootNavigator />
+    </Provider>
   );
 };
 

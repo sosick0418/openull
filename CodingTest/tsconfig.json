@@ -12,7 +12,7 @@
     "target": "esnext",
     "baseUrl": "./src",
     "paths": {
-      "~/*": ["*"]
+      "@/*": ["*"]
     }
   },
   "exclude": [
