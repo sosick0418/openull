@@ -10,7 +10,6 @@ const Tab = createBottomTabNavigator();
 
 export function BottomTab() {
   const inCartItems = useSelector<RootState>(state => state.items);
-  console.log(inCartItems);
   return (
     <Tab.Navigator initialRouteName="Home">
       <Tab.Screen
