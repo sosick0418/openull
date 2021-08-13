@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../types';
 
 const Container = styled.View`
   display: flex;
@@ -10,6 +12,8 @@ const Container = styled.View`
 `;
 
 const PageCart = () => {
+  const cartItem = useSelector<RootState>(state => state.cartItem.products);
+
   return <Container />;
 };
 

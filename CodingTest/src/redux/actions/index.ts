@@ -1,11 +1,6 @@
-import { types } from '../types';
+import * as updateItem from './ItemActions';
+import * as updateCartItem from './CartItemActions';
 
-export function updateItems(data: any): {
-  type: string;
-  payload: any;
-} {
-  return {
-    type: types.UPDATE_ITEMS,
-    payload: data,
-  };
-}
+const ActionCreators = Object.assign({}, updateItem, updateCartItem);
+
+export default ActionCreators;

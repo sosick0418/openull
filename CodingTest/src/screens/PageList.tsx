@@ -4,6 +4,8 @@ import styled from 'styled-components/native';
 import { ActivityIndicator, FlatList } from 'react-native';
 import ListItem from '../components/ListItem';
 import { useIsFocused } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { updateItems, setItemsInRedux } from '../redux/actions/ItemActions';
 
 const Container = styled.View`
   flex: 1;
@@ -25,12 +27,14 @@ const PageList = (): JSX.Element => {
   const isFetched = useRef<boolean>(false);
   const isFocused = useIsFocused();
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
   const fetchData = async (page: number, order: string) => {
     try {
       const { data } = await getAllItemsList(page, order);
       if (items.products.length === 0) {
         setItems(data);
+        dispatch(setItemsInRedux(data));
         setIsRefreshing(false);
         return;
       } else {
@@ -41,6 +45,7 @@ const PageList = (): JSX.Element => {
             products: [...prevState.products, ...data.products],
           };
         });
+        dispatch(updateItems(data.products));
         setIsRefreshing(false);
         return;
       }
@@ -67,7 +72,7 @@ const PageList = (): JSX.Element => {
     };
   }, [items]);
 
-  const renderStuff = ({ item }) => {
+  const renderStuff = ({ item }: any) => {
     return <ListItem data={item} />;
   };
 
@@ -91,7 +96,6 @@ const PageList = (): JSX.Element => {
             if (thisPage < items?.maxPage - 1) {
               setThisPage(prev => prev + 1);
               setIsRefreshing(true);
-              console.log(thisPage);
               fetchData(thisPage + 1, 'price-asc');
             } else {
               return;

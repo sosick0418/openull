@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { useNavigation } from '@react-navigation/native';
 
-const Container = styled.View`
+const Container = styled.Pressable`
   flex: 0;
   box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.16);
   border-radius: 15px;
   align-items: center;
   background-color: white;
   margin-bottom: 20px;
+  padding: 20px;
 `;
 
 const MainImage = styled.Image`
@@ -58,8 +60,11 @@ const SsomeePrice = styled.Text`
 `;
 
 const ListItem = ({ data }: any) => {
+  const navigation = useNavigation();
+
   return (
-    <Container>
+    <Container
+      onPress={() => navigation.navigate('ItemDetail', { data: data.prefix })}>
       <MainImage source={{ uri: data.mainImage }} />
       <TextContainer>
         <BrandName>{data.brand.name}</BrandName>

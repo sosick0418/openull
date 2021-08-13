@@ -26,7 +26,7 @@ export const getCatetoryItemsList = async (
 };
 
 export const getItemDetail = async (prefix: string) => {
-  return await instance.get(`products/${prefix}}`);
+  return await instance.get(`products/${prefix}`);
 };
 
 export const postBuy = async (prefix: string) => {

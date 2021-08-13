@@ -9,7 +9,7 @@ import { RootState } from '../../types';
 const Tab = createBottomTabNavigator();
 
 export function BottomTab() {
-  const inCartItems = useSelector<RootState>(state => state.items);
+  const inCartItems = useSelector<RootState>(state => state.cartItem.products);
   return (
     <Tab.Navigator initialRouteName="Home">
       <Tab.Screen

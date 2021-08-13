@@ -1,17 +1,8 @@
-import { types } from '../types';
+import { combineReducers } from 'redux';
+import ItemsReducer from './ItemsReducer';
+import CartItemReducer from './CartItemReducer';
 
-const defaultState = {
-  items: [],
-};
-
-export default function setItems(state: any = defaultState, action: any): any {
-  switch (action.type) {
-    case types.UPDATE_ITEMS:
-      return {
-        ...state.items,
-        ...action.payload,
-      };
-    default:
-      return state;
-  }
-}
+export default combineReducers({
+  item: ItemsReducer,
+  cartItem: CartItemReducer,
+});
