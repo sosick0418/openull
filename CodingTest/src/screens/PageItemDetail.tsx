@@ -1,11 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import {
-  Alert,
-  Button,
-  Linking,
-  View,
-  useWindowDimensions,
-} from 'react-native';
+import { Alert, Button, Linking, useWindowDimensions } from 'react-native';
 import styled from 'styled-components/native';
 import moment from 'moment';
 import 'moment/locale/ko';
@@ -120,6 +114,12 @@ const DetailContainer = styled.View`
   justify-content: center;
 `;
 
+const LinkButtonContainer = styled.View`
+  height: 1%;
+  justify-content: center;
+  align-items: center;
+`;
+
 const PageItemDetail = ({ route }: any) => {
   const [detail, setDetail] = useState<any>([]);
   const prefix = route.params.data;
@@ -156,14 +156,9 @@ const PageItemDetail = ({ route }: any) => {
     }, [url]);
 
     return (
-      <View
-        style={{
-          height: '1%',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+      <LinkButtonContainer style={{}}>
         <Button title={children} onPress={handlePress} />
-      </View>
+      </LinkButtonContainer>
     );
   };
 

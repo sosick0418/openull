@@ -1,4 +1,5 @@
 import { types } from '../types';
+import { ItemsState } from '../../../types';
 
 const defaultState = {
   category: {
@@ -11,9 +12,9 @@ const defaultState = {
 };
 
 export default function setItemsInRedux(
-  state: any = defaultState,
+  state: ItemsState = defaultState,
   action: any,
-): any {
+) {
   switch (action.type) {
     case types.SET_ITEMS:
       return {

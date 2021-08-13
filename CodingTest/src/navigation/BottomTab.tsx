@@ -5,12 +5,20 @@ import PageList from '../screens/PageList';
 import PageSearch from '../screens/PageSearch';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../types';
-import { Image } from 'react-native';
+import styled from 'styled-components/native';
+
+const IconImage = styled.Image.attrs({
+  resizeMode: 'contain',
+})`
+  width: 20%;
+`;
 
 const Tab = createBottomTabNavigator();
 
 export function BottomTab() {
-  const inCartItems = useSelector<RootState>(state => state.cartItem.products);
+  const inCartItems: any = useSelector<RootState>(
+    state => state.cartItem.products,
+  );
   return (
     <Tab.Navigator initialRouteName="Home">
       <Tab.Screen
@@ -19,13 +27,7 @@ export function BottomTab() {
         options={{
           header: () => null,
           tabBarIcon: () => (
-            <Image
-              source={require('../assets/images/home.png')}
-              resizeMode={'contain'}
-              style={{
-                width: '20%',
-              }}
-            />
+            <IconImage source={require('../assets/images/home.png')} />
           ),
         }}
       />
@@ -35,13 +37,7 @@ export function BottomTab() {
         options={{
           header: () => null,
           tabBarIcon: () => (
-            <Image
-              source={require('../assets/images/search.png')}
-              resizeMode={'contain'}
-              style={{
-                width: '20%',
-              }}
-            />
+            <IconImage source={require('../assets/images/search.png')} />
           ),
         }}
       />
@@ -50,15 +46,9 @@ export function BottomTab() {
         component={PageCart}
         options={{
           header: () => null,
-          tabBarBadge: inCartItems?.length === 0 ? null : inCartItems?.length,
+          tabBarBadge: inCartItems.length === 0 ? null : inCartItems.length,
           tabBarIcon: () => (
-            <Image
-              source={require('../assets/images/cart.png')}
-              resizeMode={'contain'}
-              style={{
-                width: '25%',
-              }}
-            />
+            <IconImage source={require('../assets/images/cart.png')} />
           ),
         }}
       />

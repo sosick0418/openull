@@ -33,9 +33,9 @@ const PageList = (): JSX.Element => {
     { label: '최신순', value: 'date-desc' },
   ]);
 
-  const isFetched = useRef<boolean>(false);
   const isFocused = useIsFocused();
-  const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+  const isFetched = useRef(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const dispatch = useDispatch();
 
   const fetchData = async (page: number, order: string) => {
@@ -72,7 +72,6 @@ const PageList = (): JSX.Element => {
   useEffect(() => {
     setIsRefreshing(true);
     setItems({ products: [] });
-    console.log(items);
     fetchData(thisPage, value);
     setIsRefreshing(false);
   }, [value]);

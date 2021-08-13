@@ -58,13 +58,12 @@ const NoSearchResult = styled.Text`
 const PageSearch = () => {
   const textInputValue = useRef('');
   const [searchedItem, setSerchedItem] = useState<any[]>([]);
-  const itemsInRedux = useSelector<RootState>(state => state.item.products);
-
-  console.log(searchedItem);
+  const itemsInRedux: any = useSelector<RootState>(
+    state => state.item.products,
+  );
 
   const searchFunction = (text: string) => {
-    console.log('hi');
-    let reg = new RegExp(`${text}`);
+    let reg = new RegExp(text);
     const matchedItems = itemsInRedux.filter((item: any) =>
       reg.exec(item.name),
     );

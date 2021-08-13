@@ -1,13 +1,14 @@
 import { types } from '../types';
+import { CartItemsState } from '@/../types';
 
-const defaultState = {
+const defaultState: CartItemsState = {
   products: [],
 };
 
 export default function setItemsInRedux(
-  state: any = defaultState,
+  state: CartItemsState = defaultState,
   action: any,
-): any {
+) {
   switch (action.type) {
     case types.SET_CART_ITEM:
       return {
