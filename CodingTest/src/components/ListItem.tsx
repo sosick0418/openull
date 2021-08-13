@@ -12,8 +12,9 @@ const Container = styled.Pressable`
   padding: 20px;
 `;
 
-const MainImage = styled.Image`
-  resize-mode: contain;
+const MainImage = styled.Image.attrs({
+  resizeMode: 'contain',
+})`
   width: 275px;
   height: 200px;
 `;

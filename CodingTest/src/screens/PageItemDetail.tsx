@@ -31,11 +31,11 @@ const ScrollViewContainer = styled.ScrollView.attrs({
   background: white;
 `;
 
-const MainImage = styled.Image`
-  resize-mode: cover;
+const MainImage = styled.Image.attrs({
+  resizeMode: 'cover',
+})`
   width: 100%;
   height: 4%;
-  margin-top: 1%;
 `;
 
 const NamingContainer = styled.View`
@@ -68,7 +68,7 @@ const BottomContainer = styled.View`
   width: 100%;
   flex-direction: row;
   align-items: center;
-  padding: 35px;
+  padding: 35px 40px;
   background-color: 'rgb(0, 0, 0)';
   position: absolute;
   bottom: 0;
@@ -205,10 +205,7 @@ const PageItemDetail = ({ route }: any) => {
                 value={`1차: ${detail.charges[0]}, 2차: ${detail.charges[1]}`}
               />
               <Detail title={'현재 주문 가능 수량'} value={detail.orderLimit} />
-              <Detail
-                title={'1인당 주문 가능 수량'}
-                value={detail.currentOrderLimit}
-              />
+              <Detail title={'1인당 주문 가능 수량'} value={detail.userLimit} />
               <Detail title={'배송비'} value={detail.shippingPrice} />
               <Detail title={'판매처 정보'} value={detail.shop.name} />
             </DetailContainer>

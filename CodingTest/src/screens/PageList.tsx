@@ -2,10 +2,11 @@ import { getAllItemsList } from '../api';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components/native';
 import { ActivityIndicator, FlatList } from 'react-native';
-import ListItem from '../components/ListItem';
 import { useIsFocused } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
+import DropDownPicker from 'react-native-dropdown-picker';
 import { updateItems, setItemsInRedux } from '../redux/actions/ItemActions';
+import ListItem from '../components/ListItem';
 
 const Container = styled.View`
   flex: 1;
@@ -24,6 +25,14 @@ const PageList = (): JSX.Element => {
     products: [],
   });
   const [thisPage, setThisPage] = useState(1);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState('price-asc');
+  const [dropdownItems, setDropdownItems] = useState([
+    { label: '낮은 가격 순', value: 'price-asc' },
+    { label: '높은 가격 순', value: 'price-desc' },
+    { label: '최신순', value: 'date-desc' },
+  ]);
+
   const isFetched = useRef<boolean>(false);
   const isFocused = useIsFocused();
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
@@ -39,7 +48,6 @@ const PageList = (): JSX.Element => {
         return;
       } else {
         setItems((prevState: any) => {
-          console.log(prevState);
           return {
             ...prevState,
             products: [...prevState.products, ...data.products],
@@ -62,8 +70,12 @@ const PageList = (): JSX.Element => {
   }, [isFocused]);
 
   useEffect(() => {
-    fetchData(thisPage, 'price-asc');
-  }, []);
+    setIsRefreshing(true);
+    setItems({ products: [] });
+    console.log(items);
+    fetchData(thisPage, value);
+    setIsRefreshing(false);
+  }, [value]);
 
   useEffect(() => {
     isFetched.current = true;
@@ -78,6 +90,14 @@ const PageList = (): JSX.Element => {
 
   return (
     <Container>
+      <DropDownPicker
+        open={open}
+        value={value}
+        items={dropdownItems}
+        setOpen={setOpen}
+        setValue={setValue}
+        setItems={setDropdownItems}
+      />
       {isFetched.current ? (
         <FlatList
           data={items.products}
@@ -89,17 +109,13 @@ const PageList = (): JSX.Element => {
           onRefresh={() => {
             setItems({ products: [] });
             setIsRefreshing(true);
-            fetchData(1, 'price-asc');
+            fetchData(1, value);
           }}
-          onEndReachedThreshold={1}
+          onEndReachedThreshold={0.5}
           onEndReached={() => {
-            if (thisPage < items?.maxPage - 1) {
-              setThisPage(prev => prev + 1);
-              setIsRefreshing(true);
-              fetchData(thisPage + 1, 'price-asc');
-            } else {
-              return;
-            }
+            setThisPage(prev => prev + 1);
+            setIsRefreshing(true);
+            fetchData(thisPage + 1, value);
           }}
         />
       ) : (

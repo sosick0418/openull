@@ -14,12 +14,11 @@ export default function setItemsInRedux(
         products: [...state.products, ...action.payload],
       };
     case types.DELETE_CART_ITEM:
-      const newArr = state.products.filter(
-        (item: any) => item.prefix !== action.payload.prefix,
-      );
       return {
         ...state,
-        products: [...newArr],
+        products: state.products.filter(
+          (item: any) => item.prefix !== action.payload,
+        ),
       };
     default:
       return state;
